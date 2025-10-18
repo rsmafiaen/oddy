@@ -51,11 +51,9 @@ export default function SearchPage(){
             <Header />
             <div className="flex flex-col">
                 {data && data.length > 0 ? 
-                    data.map((vare: product) => (
-                    <div className="flex flex-row w-120 justify-between" key={vare.productid}>
+                    data.map((vare: product, i) => (
+                    <div className={`flex flex-row w-fit justify-between ${i % 2 ? "bg-rema-secondary-lightgray" : "bg-white"}`} key={vare.productid}>
                         <Product product={vare}  />
-
-                        <button type="button">Legg til</button>
                     </div>
 
                     ))

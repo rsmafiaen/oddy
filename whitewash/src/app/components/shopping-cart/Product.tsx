@@ -7,7 +7,7 @@ type ProductProps = {
 
 export function Product(props: ProductProps) {
     return (
-        <div className="flex flex-row justify-between p-5 py-3 min-w-100">
+        <div className="flex flex-row justify-between px-4 py-3 min-w-100">
             <div className="flex flex-col">
                 <span className="font-bold text-rema-secondary-darkblue text-xl">{props.product.name}</span>
                 <span className="">{props.product.description}</span>
