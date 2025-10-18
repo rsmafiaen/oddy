@@ -26,14 +26,14 @@ export const ShoppingCartPreview = () => {
 					onClick={() => setOpen(false)}
 					onKeyUp={() => setOpen(false)}
 					className="absolute inset-0 top-22.5 z-30 bg-black/20 duration-150 ease-in-out transition-all"
-					role="cell"
+					role="menu"
 				>
 					<div
 						id="menu"
 						onClick={(e) => e.stopPropagation()}
 						onKeyUp={(e) => e.stopPropagation()}
 						className="absolute right-0 h-full w-md bg-white shadow-lg p-4 z-50 text-center"
-						role="menu"
+						role="menubar"
 					>
 						<div className="flex flex-col gap-3 items-center justify-center h-full text-black">
 							<span className="font-header text-rema-blue text-4xl">
