@@ -12,6 +12,7 @@ export const ShoppingCartPreview = () => {
 		<div>
 			<button
 				onClick={() => setOpen(!open)}
+				onKeyUp={() => setOpen(!open)}
 				className="font-bold flex justify-center hover:bg-rema-secondary-darkblue focus:outline-3 p-1.5 rounded-sm items-center ease-in-out duration-150 transition-all"
 				type="button"
 			>
@@ -23,7 +24,7 @@ export const ShoppingCartPreview = () => {
 				<div
 					id="bg"
 					onClick={() => setOpen(false)}
-					className="absolute inset-0 top-22.5 bg-black/20 duration-150 ease-in-out transition-all"
+					className="absolute inset-0 top-22.5 z-30 bg-black/20 duration-150 ease-in-out transition-all"
 					role="main"
 				>
 					<div
@@ -50,6 +51,7 @@ export const ShoppingCartPreview = () => {
 
 							<button
 								onClick={() => setOpen(false)}
+								onKeyUp={() => setOpen(!open)}
 								className="font-bold bg-rema-blue text-white hover:bg-rema-secondary-darkblue focus:outline-3 p-1.5 mt-3 rounded-sm items-center ease-in-out duration-150 transition-all"
 								type="button"
 							>
