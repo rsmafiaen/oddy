@@ -3,10 +3,10 @@
 import { Header } from "@/components/header/header"
 import { Oddy } from "@/components/oddy/Oddy"
 import { useQuery } from "@tanstack/react-query"
-import { Product } from "@/components/shopping-cart/Product";
+import { Product } from "@/components/shopping-cart/Product"
 import { useSearchParams } from "next/navigation"
 
-type Product = {
+export type ProductItem = {
 	productId: number
 	gtin: string
 	name: string
@@ -29,7 +29,7 @@ export default function SearchPage() {
 		queryFn: async () => {
 			const res = await fetch(url + search)
 
-			return (await res.json()) as Product[]
+			return (await res.json()) as ProductItem[]
 		},
 	})
 
@@ -53,12 +53,14 @@ export default function SearchPage() {
 			<Header />
 			<div className="flex flex-col">
 				{data && data.length > 0 ? (
-                    data.map((vare: Product, i) => (
-							<div className={`flex flex-row w-fit justify-between ${i % 2 ? "bg-rema-secondary-lightgray" : "bg-white"}`} key={vare.productId}>
-                                <Product product={vare}  />
-                            </div>
-
-                    ))
+					data.map((vare: ProductItem, i) => (
+						<div
+							className={`flex flex-row w-fit justify-between ${i % 2 ? "bg-rema-secondary-lightgray" : "bg-white"}`}
+							key={vare.productId}
+						>
+							<Product product={vare} />
+						</div>
+					))
 				) : (
 					<div>
 						{isLoading ? "Loading..." : "Fant ingen resultater"}
