@@ -116,11 +116,14 @@ export const OddyChat = ({
 
 			<div className="w-[min(90vw,420px)] flex flex-col items-end">
 				<div className="max-h-[50vh] min-h-100 overflow-auto p-3 space-y-2 w-full bg-white rounded-lg">
-					<p className="max-w-[85%] rounded px-3 py-2 bg-gray-100 text-gray-900 self-start">
+					{previousMessages.length === 0 ? (<p className="max-w-[85%] rounded px-3 py-2 bg-gray-100 text-gray-900 self-start">
 						{!isFrog
 							? "Heisann sveisann, jeg er Odd Reitan, men du kan kalle meg Oddy!"
 							: "Ribbit!"}
-					</p>
+					</p>)
+					:
+					""
+					}
 					{messages.map((m) => (
 						<p
 							key={m.id}
