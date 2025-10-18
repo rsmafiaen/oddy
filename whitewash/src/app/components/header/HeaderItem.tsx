@@ -3,9 +3,9 @@ import Image from "next/image"
 import Link from "next/link"
 
 type headerItemProps = {
-  img: string | StaticImport
-  link: string
-  title: string
+	img: string | StaticImport
+	link: string
+	title: string
 }
 
 export const HeaderItem = (props: headerItemProps) => {

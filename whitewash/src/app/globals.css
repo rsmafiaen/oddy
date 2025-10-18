@@ -1,47 +1,47 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+	--background: #ffffff;
+	--foreground: #171717;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+	--color-background: var(--background);
+	--color-foreground: var(--foreground);
 
-  --color-rema-blue: #023ea5;
-  --color-rema-red: #d71f2e;
+	--color-rema-blue: #023ea5;
+	--color-rema-red: #d71f2e;
 
-  --color-rema-secondary-lightblue: #bfdfff;
-  --color-rema-secondary-darkblue: #002855;
-  --color-rema-secondary-blue: #7eb4ff;
-  --color-rema-secondary-lightgray: #fbf8f4;
+	--color-rema-secondary-lightblue: #bfdfff;
+	--color-rema-secondary-darkblue: #002855;
+	--color-rema-secondary-blue: #7eb4ff;
+	--color-rema-secondary-lightgray: #fbf8f4;
 
-  --color-rema-supporting-lightred: #fea59c;
-  --color-rema-supporting-lightyellow: #fff1b4;
-  --color-rema-supporting-lightgreen: #bfce9b;
-  --color-rema-supporting-darkgreen: #06402e;
-  --color-rema-supporting-orange: #eea272;
-  --color-rema-supporting-violet: #cea0d4;
+	--color-rema-supporting-lightred: #fea59c;
+	--color-rema-supporting-lightyellow: #fff1b4;
+	--color-rema-supporting-lightgreen: #bfce9b;
+	--color-rema-supporting-darkgreen: #06402e;
+	--color-rema-supporting-orange: #eea272;
+	--color-rema-supporting-violet: #cea0d4;
 
-  --font-rema: var(--font-rema);
-  --font-numeral: var(--font-numeral);
-  --font-brush: var(--font-brush);
-  --font-header: var(--font-uniform);
-  --font-icons: var(--font-rema-icons);
+	--font-rema: var(--font-rema);
+	--font-numeral: var(--font-numeral);
+	--font-brush: var(--font-brush);
+	--font-header: var(--font-uniform);
+	--font-icons: var(--font-rema-icons);
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
-    --foreground: #0a0a0a;
-    --background: #ededed;
-  }
+	:root {
+		--foreground: #0a0a0a;
+		--background: #ededed;
+	}
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-rema), Arial, Helvetica, sans-serif;
+	background: var(--background);
+	color: var(--foreground);
+	font-family: var(--font-rema), Arial, Helvetica, sans-serif;
 }
 h1,
 h2,
@@ -49,142 +49,142 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: var(--font-uniform), Arial, Helvetica, sans-serif;
-  color: var(--rema-blue);
+	font-family: var(--font-uniform), Arial, Helvetica, sans-serif;
+	color: var(--rema-blue);
 }
 
 .icon-alarm:before {
-  content: "\53";
+	content: "\53";
 }
 .icon-bakrom-pc:before {
-  content: "\61";
+	content: "\61";
 }
 .icon-bil:before {
-  content: "\62";
+	content: "\62";
 }
 .icon-bruker:before {
-  content: "\63";
+	content: "\63";
 }
 .icon-butikk:before {
-  content: "\64";
+	content: "\64";
 }
 .icon-e-pakkseddel:before {
-  content: "\65";
+	content: "\65";
 }
 .icon-faktura:before {
-  content: "\66";
+	content: "\66";
 }
 .icon-full-varetelling:before {
-  content: "\67";
+	content: "\67";
 }
 .icon-graf-1:before {
-  content: "\68";
+	content: "\68";
 }
 .icon-graf-2:before {
-  content: "\69";
+	content: "\69";
 }
 .icon-hake:before {
-  content: "\6a";
+	content: "\6a";
 }
 .icon-handholdt-printer:before {
-  content: "\6b";
+	content: "\6b";
 }
 .icon-hovedkontor:before {
-  content: "\6c";
+	content: "\6c";
 }
 .icon-hovedkontor-flag:before {
-  content: "\6d";
+	content: "\6d";
 }
 .icon-ht:before {
-  content: "\6e";
+	content: "\6e";
 }
 .icon-ipad:before {
-  content: "\6f";
+	content: "\6f";
 }
 .icon-iphone:before {
-  content: "\70";
+	content: "\70";
 }
 .icon-kamera:before {
-  content: "\71";
+	content: "\71";
 }
 .icon-kasse:before {
-  content: "\72";
+	content: "\72";
 }
 .icon-konvolutt:before {
-  content: "\73";
+	content: "\73";
 }
 .icon-kredittnota:before {
-  content: "\74";
+	content: "\74";
 }
 .icon-kunde-dame:before {
-  content: "\75";
+	content: "\75";
 }
 .icon-kunde-kvinne:before {
-  content: "\76";
+	content: "\76";
 }
 .icon-kunde-mann:before {
-  content: "\77";
+	content: "\77";
 }
 .icon-kunder:before {
-  content: "\78";
+	content: "\78";
 }
 .icon-kundereise:before {
-  content: "\79";
+	content: "\79";
 }
 .icon-lokasjon:before {
-  content: "\7a";
+	content: "\7a";
 }
 .icon-lukk:before {
-  content: "\41";
+	content: "\41";
 }
 .icon-motorsag:before {
-  content: "\42";
+	content: "\42";
 }
 .icon-pakkseddel:before {
-  content: "\43";
+	content: "\43";
 }
 .icon-penger:before {
-  content: "\44";
+	content: "\44";
 }
 .icon-pil-hoyre:before {
-  content: "\45";
+	content: "\45";
 }
 .icon-pil-venstre:before {
-  content: "\46";
+	content: "\46";
 }
 .icon-printer-bakrom:before {
-  content: "\47";
+	content: "\47";
 }
 .icon-scan-pall:before {
-  content: "\48";
+	content: "\48";
 }
 .icon-scan-ssscc:before {
-  content: "\49";
+	content: "\49";
 }
 .icon-sporsmal:before {
-  content: "\4d";
+	content: "\4d";
 }
 .icon-stopp:before {
-  content: "\4e";
+	content: "\4e";
 }
 .icon-svg-sirkel:before {
-  content: "\4a";
+	content: "\4a";
 }
 .icon-svg-sms-pa-mobil:before {
-  content: "\4b";
+	content: "\4b";
 }
 .icon-svg-soppelkasse:before {
-  content: "\4c";
+	content: "\4c";
 }
 .icon-tidsfrist:before {
-  content: "\4f";
+	content: "\4f";
 }
 .icon-tommel-opp:before {
-  content: "\50";
+	content: "\50";
 }
 .icon-var-filosofi:before {
-  content: "\51";
+	content: "\51";
 }
 .icon-varseltrekant:before {
-  content: "\52";
+	content: "\52";
 }
