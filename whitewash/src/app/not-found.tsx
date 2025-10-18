@@ -3,7 +3,7 @@
 import Image from "next/image"
 import frog from "@/assets/images/frog.png"
 import prideFrog from "@/assets/images/pride-froggy.png"
-import { Header } from "@/components/header/header"
+import { Header } from "@/components/header/Header"
 import Link from "next/link"
 import { useEffect, useState } from "react"
 

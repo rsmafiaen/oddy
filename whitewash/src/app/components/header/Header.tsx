@@ -5,9 +5,10 @@ import dinner from "@public/header-icons/dinner.svg"
 import sale from "@public/header-icons/sale.svg"
 import gps from "@public/header-icons/gps.svg"
 import globe from "@public/header-icons/globe.svg"
-import { HeaderItem } from "./headerItem"
+import { HeaderItem } from "./HeaderItem"
 import Link from "next/link"
 import { type FormEvent, useState } from "react"
+import { ShoppingCartPreview } from "./ShoppingCartPreview"
 
 export function Header() {
 	const [searchInput, setSearchInput] = useState("")
@@ -20,7 +21,7 @@ export function Header() {
 	}
 
 	return (
-		<div className="h-22.5 bg-rema-blue flex flex-row items-center justify-evenly px-5 text-white gap-5">
+		<div className="h-22.5 bg-rema-blue flex flex-row items-center justify-evenly px-8 text-white gap-5">
 			<Link href="/">
 				<Image src={logo} alt={"REMA 1000"} />
 			</Link>
@@ -52,10 +53,7 @@ export function Header() {
 					Søk
 				</button>
 			</form>
-
-			<Link className="font-bold" href="/handleliste">
-				Handleliste
-			</Link>
+			<ShoppingCartPreview />
 		</div>
 	)
 }

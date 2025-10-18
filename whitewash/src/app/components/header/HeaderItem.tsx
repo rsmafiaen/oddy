@@ -8,7 +8,7 @@ type headerItemProps = {
 	title: string
 }
 
-export function HeaderItem(props: headerItemProps) {
+export const HeaderItem = (props: headerItemProps) => {
 	return (
 		<div className="mr-8">
 			<Link className="flex flex-row" href={`/${props.link}`}>
