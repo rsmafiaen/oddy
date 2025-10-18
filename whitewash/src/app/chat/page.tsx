@@ -3,5 +3,5 @@
 import { OddyChat } from "@/components/chat/OddyChat"
 
 export default function Chat() {
-  return <OddyChat />
+	return <OddyChat />
 }

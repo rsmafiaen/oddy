@@ -30,7 +30,11 @@ export const OddyChat = () => {
 
 		ws.current.onmessage = (event) => {
 			if (event.data === "Successfully connected") return
-			addMessage({ id: crypto.randomUUID(), role: "oddy", message: String(event.data) })
+			addMessage({
+				id: crypto.randomUUID(),
+				role: "oddy",
+				message: String(event.data),
+			})
 		}
 
 		ws.current.onerror = (err) => console.error("❌ WebSocket error:", err)
@@ -46,7 +50,11 @@ export const OddyChat = () => {
 		const trimmed = input.trim()
 		if (!trimmed) return
 
-		const msg: ChatMsg = { id: crypto.randomUUID(), role: "user", message: trimmed }
+		const msg: ChatMsg = {
+			id: crypto.randomUUID(),
+			role: "user",
+			message: trimmed,
+		}
 		addMessage(msg)
 		ws.current?.send(trimmed)
 		setInput("")
