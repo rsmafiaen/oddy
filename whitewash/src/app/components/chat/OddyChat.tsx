@@ -5,7 +5,7 @@ import oddy from "@/assets/images/oddy.png"
 import frog from "@/assets/images/frog.png"
 import prideFrog from "@/assets/images/pride-froggy.png"
 import styles from "../oddy/Oddy.module.css"
-import { useCallback, useEffect, useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { useStateArray } from "@/hooks/useStateArray"
 
 type ChatMsg = {
@@ -17,21 +17,26 @@ type ChatMsg = {
 type OddyChatProps = {
 	isFrog?: boolean
 	isPride?: boolean
+	previousMessages?: ChatMsg[]
 }
 
 export const OddyChat = ({
 	isFrog = false,
 	isPride = false,
+	previousMessages
 }: OddyChatProps) => {
 	const [avatar, setAvatar] = useState<StaticImageData>(oddy)
 	const [name, setName] = useState<"Froggy" | "Oddy">(
 		isFrog ? "Froggy" : "Oddy",
 	)
-
-	const messagesEndRef = useRef(null)
-	const [messages, addMessage] = useStateArray<ChatMsg>([])
+	previousMessages = previousMessages !== undefined ? [...previousMessages] : []
+	
+	const [messages, addMessage] = useStateArray<ChatMsg>(previousMessages)
 	const [input, setInput] = useState("")
 	const ws = useRef<WebSocket | null>(null)
+
+	const messagesEndRef = useRef(null)
+
 
 	const scrollToBottom = () => {
 		messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
@@ -87,6 +92,7 @@ export const OddyChat = ({
 		e.preventDefault()
 		const trimmed = input.trim()
 		if (!trimmed) return
+
 		const msg: ChatMsg = {
 			id: crypto.randomUUID(),
 			role: "user",

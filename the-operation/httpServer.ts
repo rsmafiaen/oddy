@@ -6,6 +6,14 @@ import {
 	PRIDE_EXTENSION,
 } from "./main.ts"
 
+const options = {
+	headers: {
+		"Access-Control-Request-Headers": "*",
+		"Access-Control-Request-Method": "*",
+		"Access-Control-Allow-Origin": "*",
+	},
+}
+
 export const handleHttp = async (
 	req: Request,
 	_env: Record<string, string>,
@@ -24,7 +32,7 @@ export const handleHttp = async (
 			[`%${search === null ? "" : search}%`],
 		)
 
-		return Response.json(products)
+		return Response.json(products, options)
 	}
 
 	if (url.pathname === "/api/froggy") {
@@ -44,7 +52,7 @@ export const handleHttp = async (
 			],
 		})
 
-		return Response.json({ message: response.message.content })
+		return Response.json({ message: response.message.content }, options)
 	}
 
 	if (url.pathname === "/api/oddy") {
@@ -90,7 +98,7 @@ export const handleHttp = async (
 										CEO, Reitan Retail
 										// `.replaceAll("\t", ""),
 				},
-				{ status: 418 },
+				{ ...options, status: 418 },
 			)
 		}
 
@@ -104,8 +112,8 @@ export const handleHttp = async (
 			],
 		})
 
-		return Response.json({ message: response.message.content })
+		return Response.json({ message: response.message.content }, options)
 	}
 
-	return new Response(url.pathname)
+	return new Response(url.pathname, options)
 }
