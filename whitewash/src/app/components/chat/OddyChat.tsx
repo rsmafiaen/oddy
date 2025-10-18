@@ -10,8 +10,8 @@ import { useStateArray } from "@/hooks/useStateArray"
 
 type ChatMsg = {
 	id: string
-	role: "user" | "oddy"
-	message: string
+	role: "user" | "assistant"
+	content: string
 }
 
 type OddyChatProps = {
@@ -71,6 +71,7 @@ export const OddyChat = ({
 		const url = new URL("ws://localhost:4001")
 		url.searchParams.set("agent", agent)
 		url.searchParams.set("isPride", String(isPride))
+		url.searchParams.set("prevMessages", JSON.stringify(previousMessages.map((p) => {return {role: p.role, content: p.content}})))
 
 		ws.current?.close()
 		ws.current = new WebSocket(url.toString())
@@ -80,8 +81,8 @@ export const OddyChat = ({
 				return () => ws.current?.close()
 			addMessage({
 				id: crypto.randomUUID(),
-				role: "oddy",
-				message: String(event.data),
+				role: "assistant",
+				content: String(event.data),
 			})
 			scrollToBottom()
 		}
@@ -98,7 +99,7 @@ export const OddyChat = ({
 		const msg: ChatMsg = {
 			id: crypto.randomUUID(),
 			role: "user",
-			message: trimmed,
+			content: trimmed,
 		}
 		addMessage(msg)
 		ws.current?.send(trimmed)
@@ -130,12 +131,12 @@ export const OddyChat = ({
 						<p
 							key={m.id}
 							className={`max-w-[85%] rounded px-3 py-2 ${
-								m.role === "oddy"
+								m.role === "assistant"
 									? "bg-gray-100 text-gray-900 self-start"
 									: "bg-blue-600 text-white self-end ml-auto"
 							}`}
 						>
-							{m.message}
+							{m.content}
 						</p>
 					))}
 					<div ref={messagesEndRef} />
