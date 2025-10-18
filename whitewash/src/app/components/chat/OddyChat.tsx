@@ -10,11 +10,11 @@ type ChatMsg = {
 }
 
 type OddyProps = {
-  previousMessages?: ChatMsg[]
+	previousMessages?: ChatMsg[]
 }
 
-export const OddyChat = ({previousMessages}: OddyProps) => {
-  previousMessages = previousMessages !== undefined ? [...previousMessages] : []
+export const OddyChat = ({ previousMessages }: OddyProps) => {
+	previousMessages = previousMessages !== undefined ? [...previousMessages] : []
 
 	const [messages, addMessage] = useStateArray<ChatMsg>(previousMessages)
 	const [input, setInput] = useState("")

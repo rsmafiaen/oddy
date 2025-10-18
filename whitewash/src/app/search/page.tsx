@@ -4,7 +4,6 @@ import { Header } from "@/components/header/header"
 import { Oddy } from "@/components/oddy/Oddy"
 import { useQuery } from "@tanstack/react-query"
 import { useSearchParams } from "next/navigation"
-import { useEffect, useState } from "react"
 
 type Product = {
 	productId: number
@@ -28,24 +27,24 @@ export default function SearchPage() {
 		queryKey: ["search", search],
 		queryFn: async () => {
 			const res = await fetch(url + search)
-			
+
 			return (await res.json()) as Product[]
-		}
+		},
 	})
 
 	const { data: oddyResponse } = useQuery({
 		queryKey: ["Oddy", "oddySearch", JSON.stringify(data)],
 		queryFn: async () => {
 			const url = "http://localhost:4000/api/oddy?inMessage="
-			
+
 			const oddyMessage = `Jeg har søkt på ${search} på nettsiden din, og fått opp disse resultatene (i json format): ${JSON.stringify(data)}. Gi meg en anbefaling på hva jeg burde kjøpe basert på CO2 fotavtrykket til varene, pris og sunnhet`
 			console.log(oddyMessage)
 
 			const res = await fetch(url + oddyMessage)
 
-			return await (res.json()) as { message: string }
+			return (await res.json()) as { message: string }
 		},
-		enabled: !!data
+		enabled: !!data,
 	})
 
 	return (
