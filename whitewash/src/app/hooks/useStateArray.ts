@@ -1,6 +1,6 @@
 import { useState, useCallback } from "react"
 
-export const useStateArray = <T,>(
+export const useStateArray = <T>(
   initialValue: T[],
 ): readonly [T[], (newValue: T) => void] => {
   const [value, setValue] = useState<T[]>(initialValue)

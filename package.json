@@ -1,0 +1,6 @@
+{
+	"scripts": {
+		"lint": "cd the-operation && deno run lint && cd .. && cd whitewash && pnpm lint",
+		"lint-check": "cd the-operation && deno run lint-check && cd .. && cd whitewash && pnpm-lint-check"
+	}
+}

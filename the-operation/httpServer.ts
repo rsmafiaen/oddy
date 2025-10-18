@@ -1,6 +1,10 @@
 import type { NeonQueryFunction } from "npm:@neondatabase/serverless"
 import type { Ollama } from "npm:ollama"
-import { ODDY_INITIAL_PROMPT } from "./main.ts"
+import {
+	FROGGY_INITIAL_PROMPT,
+	ODDY_INITIAL_PROMPT,
+	PRIDE_EXTENSION,
+} from "./main.ts"
 
 var options = {
 	headers: {
@@ -32,9 +36,23 @@ export const handleHttp = async (
 	}
 
 	if (url.pathname === "/api/froggy") {
-		const products = { message: "ribbit" }
+		const params = url.searchParams
+		const isPride = params.get("isPride") === "true"
+		const froggyInput = params.get("inMessage")
+		const prompt = isPride
+			? FROGGY_INITIAL_PROMPT + PRIDE_EXTENSION
+			: FROGGY_INITIAL_PROMPT
+		const response = await ollama.chat({
+			model: "gpt-oss:120b",
+			messages: [
+				{
+					role: "user",
+					content: `${prompt} The request from the user is: ${froggyInput}`,
+				},
+			],
+		})
 
-		return Response.json(products, options)
+		return Response.json({ message: response.message.content }, options)
 	}
 
 	if (url.pathname === "/api/oddy") {
