@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import localFont from "next/font/local"
 import "./globals.css"
+import Providers from "./providers"
 
 const rema = localFont({
 	src: [
@@ -87,7 +88,7 @@ export default function RootLayout({
 			<body
 				className={`${rema.variable} ${remaBrush.variable} ${remaNumeral.variable} ${uniform.variable} ${remaIcon.variable} antialiased`}
 			>
-				{children}
+				<Providers>{children}</Providers>
 			</body>
 		</html>
 	)
