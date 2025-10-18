@@ -8,7 +8,6 @@ import * as React from "react"
 import Popover from "@mui/material/Popover"
 import Typography from "@mui/material/Typography"
 import { useEffect, useState } from "react"
-import { eventNames } from "process"
 
 export const Oddy = ({
   message = "Hei! Jeg er Oddy, kan jeg hjelpe deg med noe?",
