@@ -14,7 +14,6 @@ export const handleWebsocket = (req: Request, ollama: Ollama) => {
 	const agent = (url.searchParams.get("agent") ?? "oddy").toLowerCase() // "oddy" | "froggy"
 	const isPride = url.searchParams.get("isPride") === "true"
 	const previousMessagesRaw = url.searchParams.get("prevMessages")
-	
 
 	const basePrompt =
 		agent === "froggy"
@@ -25,9 +24,13 @@ export const handleWebsocket = (req: Request, ollama: Ollama) => {
 
 	let previousMessages: Message[]
 	try {
-		previousMessages = previousMessagesRaw !== null ? JSON.parse(previousMessagesRaw) : []
+		previousMessages =
+			previousMessagesRaw !== null ? JSON.parse(previousMessagesRaw) : []
 		if (previousMessages.length > 0) {
-			previousMessages = [{ role: "user", content: basePrompt }, ...previousMessages]
+			previousMessages = [
+				{ role: "user", content: basePrompt },
+				...previousMessages,
+			]
 		}
 	} catch (_e) {
 		previousMessages = []
