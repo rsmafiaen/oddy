@@ -76,7 +76,8 @@ export const OddyChat = ({
 		ws.current = new WebSocket(url.toString())
 
 		ws.current.onmessage = (event) => {
-			if (event.data === "Successfully connected") return () => ws.current?.close()
+			if (event.data === "Successfully connected")
+				return () => ws.current?.close()
 			addMessage({
 				id: crypto.randomUUID(),
 				role: "oddy",
@@ -87,7 +88,7 @@ export const OddyChat = ({
 
 		return () => ws.current?.close()
 		// biome-ignore lint: Den funker ikke om vi wrapper med en usecallback
-	}, [isFrog, isPride, addMessage])
+	}, [isFrog, isPride, addMessage, scrollToBottom])
 
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault()
@@ -116,14 +117,15 @@ export const OddyChat = ({
 
 			<div className="w-[min(90vw,420px)] flex flex-col items-end">
 				<div className="max-h-[50vh] min-h-100 overflow-auto p-3 space-y-2 w-full bg-white rounded-lg">
-					{previousMessages.length === 0 ? (<p className="max-w-[85%] rounded px-3 py-2 bg-gray-100 text-gray-900 self-start">
-						{!isFrog
-							? "Heisann sveisann, jeg er Odd Reitan, men du kan kalle meg Oddy!"
-							: "Ribbit!"}
-					</p>)
-					:
-					""
-					}
+					{previousMessages.length === 0 ? (
+						<p className="max-w-[85%] rounded px-3 py-2 bg-gray-100 text-gray-900 self-start">
+							{!isFrog
+								? "Heisann sveisann, jeg er Odd Reitan, men du kan kalle meg Oddy!"
+								: "Ribbit!"}
+						</p>
+					) : (
+						""
+					)}
 					{messages.map((m) => (
 						<p
 							key={m.id}

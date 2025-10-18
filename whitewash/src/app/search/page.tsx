@@ -4,7 +4,6 @@ import { OddyChat } from "@/components/chat/OddyChat"
 import { Header } from "@/components/header/header"
 import { Oddy } from "@/components/oddy/Oddy"
 import { Product } from "@/components/shopping-cart/Product"
-import { Popover } from "@mui/material"
 import { useQuery } from "@tanstack/react-query"
 import { useSearchParams } from "next/navigation"
 import { useState } from "react"
@@ -23,7 +22,7 @@ export type ProductItem = {
 }
 
 export default function SearchPage() {
-	const [chattingWithOddy, setChattingWithOddy] = useState(false);
+	const [chattingWithOddy, setChattingWithOddy] = useState(false)
 	const searchParams = useSearchParams()
 	const search = searchParams.get("a")
 	const url = `http://localhost:4000/api/findProducts?search=`
@@ -55,9 +54,23 @@ export default function SearchPage() {
 	const handleToggleChat = () => setChattingWithOddy((v) => !v)
 
 	const oddyView = chattingWithOddy ? (
-		<OddyChat previousMessages={oddyResponse ? [{id: crypto.randomUUID(), role:"oddy",  message: oddyResponse.message}] : []}/>
+		<OddyChat
+			previousMessages={
+				oddyResponse
+					? [
+							{
+								id: crypto.randomUUID(),
+								role: "oddy",
+								message: oddyResponse.message,
+							},
+						]
+					: []
+			}
+		/>
 	) : (
-		oddyResponse && <Oddy message={oddyResponse.message} onClick={handleToggleChat} />
+		oddyResponse && (
+			<Oddy message={oddyResponse.message} onClick={handleToggleChat} />
+		)
 	)
 
 	return (
