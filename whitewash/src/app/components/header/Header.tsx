@@ -37,7 +37,7 @@ export const Header = () => {
         <button type="button" className="bg-rema-blue px-4 py-2 relative h-fit -ml-16 z-3 rounded">Søk</button>
       </div>
       <div>
-        <span onClick={() => setOpen(!open)} className="cursor-pointer">Handleliste</span>
+        <span onClick={() => setOpen(!open)} className="cursor-pointer font-bold">Handleliste</span>
       </div>
       {open && <ShoppingCartModal />}
     </div>
