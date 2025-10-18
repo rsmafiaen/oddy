@@ -89,7 +89,7 @@ export const OddyChat = ({
 
 		return () => ws.current?.close()
 		// biome-ignore lint: Den funker ikke om vi wrapper med en usecallback
-	}, [isFrog, isPride, addMessage, scrollToBottom])
+	}, [isFrog, isPride, addMessage])
 
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault()
@@ -127,7 +127,7 @@ export const OddyChat = ({
 					) : (
 						""
 					)}
-					{messages.map((m) => (
+					{messages.filter((v) => v.id !== "0").map((m) => (
 						<p
 							key={m.id}
 							className={`max-w-[85%] rounded px-3 py-2 ${

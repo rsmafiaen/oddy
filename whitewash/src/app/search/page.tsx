@@ -36,12 +36,12 @@ export default function SearchPage() {
 		},
 	})
 
+	const oddyMessage = `Jeg har søkt på ${search} på nettsiden din, og fått opp disse resultatene (i json format): ${JSON.stringify(data)}. Gi meg en anbefaling på hva jeg burde kjøpe basert på CO2 fotavtrykket til varene, pris og sunnhet. Til senere svar, vennligst bare referer til disse varene og baser svar på resultatene`
 	const { data: oddyResponse } = useQuery({
 		queryKey: ["Oddy", "oddySearch", JSON.stringify(data)],
 		queryFn: async () => {
 			const url = "http://localhost:4000/api/oddy?inMessage="
 
-			const oddyMessage = `Jeg har søkt på ${search} på nettsiden din, og fått opp disse resultatene (i json format): ${JSON.stringify(data)}. Gi meg en anbefaling på hva jeg burde kjøpe basert på CO2 fotavtrykket til varene, pris og sunnhet`
 			// console.log(oddyMessage)
 
 			const res = await fetch(url + oddyMessage)
@@ -59,9 +59,14 @@ export default function SearchPage() {
 				oddyResponse
 					? [
 							{
+								id: "0",
+								role: "user",
+								content: oddyMessage,
+							},
+							{
 								id: crypto.randomUUID(),
-								role: "oddy",
-								message: oddyResponse.message,
+								role: "assistant",
+								content: oddyResponse.message,
 							},
 						]
 					: []
