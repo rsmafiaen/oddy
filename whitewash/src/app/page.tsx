@@ -56,7 +56,7 @@ export default function Home() {
 					src={oddyImg}
 					alt="Oddy our supreme leader"
 					className="rounded-lg"
-          />
+				/>
 				<div className="bg-white rounded-lg flex items-center justify-center p-20">
 					<p className="mt-4 text-center text-lg italic">
 						"Rema‑1000 er som... som... wow! Billige priser, så... så god smak,
@@ -64,7 +64,7 @@ export default function Home() {
 					</p>
 				</div>
 			</div>
-      {oddyView}
+			{oddyView}
 		</div>
 	)
 }
