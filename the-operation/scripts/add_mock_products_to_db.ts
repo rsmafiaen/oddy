@@ -11,11 +11,11 @@ const values = items.map((item) => {
 })
 
 const insertstring =
-	"INSERT INTO products (productId, gtin, name, description, price, pricePerUnit, unit, allergens, carbonFootprintGram, organic) VALUES\n" +
+	`INSERT INTO products ("productId", "gtin", "name", "description", "price", "pricePerUnit", "unit", "allergens", "carbonFootprintGram", "organic") VALUES\n` +
 	values.join(",\n") +
 	";"
 
 const sql = neon(env.NEON_CONNECTION_STRING)
 
-await sql`CREATE TABLE IF NOT EXISTS products(productId INT PRIMARY KEY, gtin TEXT, name TEXT, description TEXT, price FLOAT, pricePerUnit FLOAT, unit TEXT, allergens TEXT[], carbonFootprintGram INT, organic BOOLEAN);`
+await sql`CREATE TABLE IF NOT EXISTS products("productId" INT PRIMARY KEY, "gtin" TEXT, name TEXT, "description" TEXT, "price" FLOAT, "pricePerUnit" FLOAT, "unit" TEXT, "allergens" TEXT[], "carbonFootprintGram" INT, "organic" BOOLEAN);`
 await sql.query(insertstring)

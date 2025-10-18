@@ -9,8 +9,14 @@ type ChatMsg = {
 	message: string
 }
 
-export const OddyChat = () => {
-	const [messages, addMessage] = useStateArray<ChatMsg>([])
+type OddyProps = {
+	previousMessages?: ChatMsg[]
+}
+
+export const OddyChat = ({ previousMessages }: OddyProps) => {
+	previousMessages = previousMessages !== undefined ? [...previousMessages] : []
+
+	const [messages, addMessage] = useStateArray<ChatMsg>(previousMessages)
 	const [input, setInput] = useState("")
 	const [agent, setAgent] = useState<"oddy" | "froggy">("froggy")
 	const [isPride, setIsPride] = useState(false)
@@ -30,7 +36,11 @@ export const OddyChat = () => {
 
 		ws.current.onmessage = (event) => {
 			if (event.data === "Successfully connected") return
-			addMessage({ id: crypto.randomUUID(), role: "oddy", message: String(event.data) })
+			addMessage({
+				id: crypto.randomUUID(),
+				role: "oddy",
+				message: String(event.data),
+			})
 		}
 
 		ws.current.onerror = (err) => console.error("❌ WebSocket error:", err)
@@ -46,7 +56,11 @@ export const OddyChat = () => {
 		const trimmed = input.trim()
 		if (!trimmed) return
 
-		const msg: ChatMsg = { id: crypto.randomUUID(), role: "user", message: trimmed }
+		const msg: ChatMsg = {
+			id: crypto.randomUUID(),
+			role: "user",
+			message: trimmed,
+		}
 		addMessage(msg)
 		ws.current?.send(trimmed)
 		setInput("")

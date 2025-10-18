@@ -1,68 +1,72 @@
-'use client'
+"use client"
 
 import { Header } from "@/components/header/header"
+import { Oddy } from "@/components/oddy/Oddy"
+import { useQuery } from "@tanstack/react-query"
 import { Product } from "@/components/shopping-cart/Product";
 import { useSearchParams } from "next/navigation"
-import { useEffect, useState } from "react";
 
-export type product = {
-    productid: number,
-    gtin: string,
-    name: string,
-    description: string,
-    price: number,
-    pricePerUnit: number,
-    priceperunit: number,
-    unit: string,
-    allergens: string,
-    carbonFootprintGram: number,
-    organic: boolean,
+type Product = {
+	productId: number
+	gtin: string
+	name: string
+	description: string
+	price: number
+	pricePerUnit: number
+	unit: string
+	allergens: string
+	carbonFootprintGram: number
+	organic: boolean
 }
 
-export default function SearchPage(){
-    const  [data, setData] = useState<product[]>();
-    const  [loading, setLoading] = useState<boolean>(true);
+export default function SearchPage() {
+	const searchParams = useSearchParams()
+	const search = searchParams.get("a")
+	const url = `http://localhost:4000/api/findProducts?search=`
 
-    const searchParams = useSearchParams();
-    const search = searchParams.get('a');
+	const { data, isLoading, error } = useQuery({
+		queryKey: ["search", search],
+		queryFn: async () => {
+			const res = await fetch(url + search)
 
-    useEffect (() => {
-        const url=`http://localhost:4000/api/findProducts?search=`;
+			return (await res.json()) as Product[]
+		},
+	})
 
-        const fetchData = async () => {
-            try {
-                console.log("fetching")
-                const response = await fetch(url + search);
-                const result = await response.json();
-                setData(result);
-                setLoading(false);
-                console.log(result)
-            } catch (error) {
-                console.error("Error fetching data:", error);
-            }
-        };
-        fetchData();
+	const { data: oddyResponse } = useQuery({
+		queryKey: ["Oddy", "oddySearch", JSON.stringify(data)],
+		queryFn: async () => {
+			const url = "http://localhost:4000/api/oddy?inMessage="
 
-    }, [search]);
-    
+			const oddyMessage = `Jeg har søkt på ${search} på nettsiden din, og fått opp disse resultatene (i json format): ${JSON.stringify(data)}. Gi meg en anbefaling på hva jeg burde kjøpe basert på CO2 fotavtrykket til varene, pris og sunnhet`
+			console.log(oddyMessage)
 
-    return(
-        <div>
-            <Header />
-            <div className="flex flex-col">
-                {data && data.length > 0 ? 
-                    data.map((vare: product, i) => (
-                    <div className={`flex flex-row w-fit justify-between ${i % 2 ? "bg-rema-secondary-lightgray" : "bg-white"}`} key={vare.productid}>
-                        <Product product={vare}  />
-                    </div>
+			const res = await fetch(url + oddyMessage)
+
+			return (await res.json()) as { message: string }
+		},
+		enabled: !!data,
+	})
+
+	return (
+		<div>
+			<Header />
+			<div className="flex flex-col">
+				{data && data.length > 0 ? (
+                    data.map((vare: Product, i) => (
+							<div className={`flex flex-row w-fit justify-between ${i % 2 ? "bg-rema-secondary-lightgray" : "bg-white"}`} key={vare.productId}>
+                                <Product product={vare}  />
+                            </div>
 
                     ))
-                    : 
-                    <div>
-                        {loading ? "Loading..." : "Fant ingen resultater"}
-                    </div>
-                }
-            </div>
-        </div>
-    )
+				) : (
+					<div>
+						{isLoading ? "Loading..." : "Fant ingen resultater"}
+						{error ? "En feil oppstod. Vennligst prøv igjen" : ""}
+					</div>
+				)}
+				{oddyResponse && <Oddy message={oddyResponse.message} />}
+			</div>
+		</div>
+	)
 }

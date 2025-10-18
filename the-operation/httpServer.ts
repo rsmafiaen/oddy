@@ -6,7 +6,7 @@ import {
 	PRIDE_EXTENSION,
 } from "./main.ts"
 
-var options = {
+const options = {
 	headers: {
 		"Access-Control-Request-Headers": "*",
 		"Access-Control-Request-Method": "*",
