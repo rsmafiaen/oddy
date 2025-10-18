@@ -19,6 +19,7 @@ type product = {
 
 export default function SearchPage(){
     const  [data, setData] = useState<product[]>();
+    const  [loading, setLoading] = useState<boolean>(true);
 
     const searchParams = useSearchParams();
     const search = searchParams.get('a');
@@ -32,6 +33,7 @@ export default function SearchPage(){
                 const response = await fetch(url + search);
                 const result = await response.json();
                 setData(result);
+                setLoading(false);
                 // console.log(result)
             } catch (error) {
                 console.error("Error fetching data:", error);
@@ -47,22 +49,22 @@ export default function SearchPage(){
             <Header />
             <div className="flex flex-col">
                 {data && data.length > 0 ? 
-                (
-                <ul>
-                    {data.map((vare: product) => (
-                    
-                    <li key={vare.productid}> 
-                        {/* Vare component */}
-                        {vare.name} 
-                    </li>
-                    ))}
-                </ul>
-                ) 
-                : 
-                <div>
-                    Ingen resultater for det søket
-                </div>
-            }
+                    (
+                    <ul>
+                        {data.map((vare: product) => (
+                        
+                        <li key={vare.productid}> 
+                            {/* Vare component */}
+                            {vare.name} 
+                        </li>
+                        ))}
+                    </ul>
+                    ) 
+                    : 
+                    <div>
+                        {loading ? "Loading..." : "Fant ingen resultater"}
+                    </div>
+                }
             </div>
         </div>
     )
