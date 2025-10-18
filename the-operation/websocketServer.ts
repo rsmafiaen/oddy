@@ -13,6 +13,7 @@ export const handleWebsocket = (req: Request, ollama: Ollama) => {
 	const url = new URL(req.url)
 	const agent = (url.searchParams.get("agent") ?? "oddy").toLowerCase() // "oddy" | "froggy"
 	const isPride = url.searchParams.get("isPride") === "true"
+	const previousMessagesRaw = url.searchParams.get("prevMessages")
 
 	const basePrompt =
 		agent === "froggy"
@@ -21,7 +22,21 @@ export const handleWebsocket = (req: Request, ollama: Ollama) => {
 
 	const model = agent === "froggy" ? "gpt-oss:20b" : "gpt-oss:120b"
 
-	let messages: Message[] = []
+	let previousMessages: Message[]
+	try {
+		previousMessages =
+			previousMessagesRaw !== null ? JSON.parse(previousMessagesRaw) : []
+		if (previousMessages.length > 0) {
+			previousMessages = [
+				{ role: "user", content: basePrompt },
+				...previousMessages,
+			]
+		}
+	} catch (_e) {
+		previousMessages = []
+	}
+
+	let messages: Message[] = previousMessages
 
 	const { socket, response } = Deno.upgradeWebSocket(req)
 
