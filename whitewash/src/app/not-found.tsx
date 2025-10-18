@@ -1,17 +1,28 @@
-import Image from "next/image";
-import frawg from "@/assets/images/frog.png";
+"use client"
 
-import { Header } from "@/components/header/Header";
-import Link from "next/link";
+import Image from "next/image"
+import frog from "@/assets/images/frog.png"
+import prideFrog from "@/assets/images/pride-froggy.png"
+import { Header } from "@/components/header/Header"
+import Link from "next/link"
+import { useEffect, useState } from "react"
 
 export default function HeaderPage() {
+  const [frogImage, setFrogImage] = useState(frog)
+
+  useEffect(() => {
+    if (Math.random() < 1 / 20) {
+      setFrogImage(prideFrog)
+    }
+  }, [])
+
   return (
     <div className="min-h-screen bg-[#fff] flex flex-col">
       <Header />
       <div className="flex-1 flex flex-col justify-center items-center">
         <span className="text-black">Ikke noe å se her.</span>
         <Link href="/">
-          <Image src={frawg} alt="frog" height="300" />
+          <Image src={frogImage} alt="frog" height={300} />
         </Link>
       </div>
     </div>
