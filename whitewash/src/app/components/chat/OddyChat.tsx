@@ -9,8 +9,14 @@ type ChatMsg = {
 	message: string
 }
 
-export const OddyChat = () => {
-	const [messages, addMessage] = useStateArray<ChatMsg>([])
+type OddyProps = {
+	previousMessages?: ChatMsg[]
+}
+
+export const OddyChat = ({ previousMessages }: OddyProps) => {
+	previousMessages = previousMessages !== undefined ? [...previousMessages] : []
+
+	const [messages, addMessage] = useStateArray<ChatMsg>(previousMessages)
 	const [input, setInput] = useState("")
 	const [agent, setAgent] = useState<"oddy" | "froggy">("froggy")
 	const [isPride, setIsPride] = useState(false)
