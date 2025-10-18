@@ -51,7 +51,6 @@ export const OddyChat = ({
 
 	useEffect(() => {
 		scrollToBottom()
-		// biome-ignore lint: Den funker ikke om vi wrapper med en usecallback
 	}, [scrollToBottom])
 
 	// pick correct avatar on mount or when props change
@@ -95,7 +94,6 @@ export const OddyChat = ({
 		}
 
 		return () => ws.current?.close()
-		// biome-ignore lint: Den funker ikke om vi wrapper med en usecallback
 	}, [isFrog, isPride, addMessage, previousMessages.map, ])
 
 	const handleSubmit = (e: React.FormEvent) => {
