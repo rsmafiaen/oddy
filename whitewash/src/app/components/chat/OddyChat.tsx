@@ -76,7 +76,7 @@ export const OddyChat = ({
 		ws.current = new WebSocket(url.toString())
 
 		ws.current.onmessage = (event) => {
-			if (event.data === "Successfully connected") return
+			if (event.data === "Successfully connected") return () => ws.current?.close()
 			addMessage({
 				id: crypto.randomUUID(),
 				role: "oddy",
@@ -87,7 +87,7 @@ export const OddyChat = ({
 
 		return () => ws.current?.close()
 		// biome-ignore lint: Den funker ikke om vi wrapper med en usecallback
-	}, [isFrog, isPride, addMessage, scrollToBottom])
+	}, [isFrog, isPride, addMessage])
 
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault()
