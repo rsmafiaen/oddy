@@ -71,7 +71,14 @@ export const OddyChat = ({
 		const url = new URL("ws://localhost:4001")
 		url.searchParams.set("agent", agent)
 		url.searchParams.set("isPride", String(isPride))
-		url.searchParams.set("prevMessages", JSON.stringify(previousMessages.map((p) => {return {role: p.role, content: p.content}})))
+		url.searchParams.set(
+			"prevMessages",
+			JSON.stringify(
+				previousMessages.map((p) => {
+					return { role: p.role, content: p.content }
+				}),
+			),
+		)
 
 		ws.current?.close()
 		ws.current = new WebSocket(url.toString())
@@ -89,7 +96,7 @@ export const OddyChat = ({
 
 		return () => ws.current?.close()
 		// biome-ignore lint: Den funker ikke om vi wrapper med en usecallback
-	}, [isFrog, isPride, addMessage])
+	}, [isFrog, isPride, addMessage, previousMessages.map, scrollToBottom])
 
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault()
@@ -127,18 +134,20 @@ export const OddyChat = ({
 					) : (
 						""
 					)}
-					{messages.filter((v) => v.id !== "0").map((m) => (
-						<p
-							key={m.id}
-							className={`max-w-[85%] rounded px-3 py-2 ${
-								m.role === "assistant"
-									? "bg-gray-100 text-gray-900 self-start"
-									: "bg-blue-600 text-white self-end ml-auto"
-							}`}
-						>
-							{m.content}
-						</p>
-					))}
+					{messages
+						.filter((v) => v.id !== "0")
+						.map((m) => (
+							<p
+								key={m.id}
+								className={`max-w-[85%] rounded px-3 py-2 ${
+									m.role === "assistant"
+										? "bg-gray-100 text-gray-900 self-start"
+										: "bg-blue-600 text-white self-end ml-auto"
+								}`}
+							>
+								{m.content}
+							</p>
+						))}
 					<div ref={messagesEndRef} />
 				</div>
 
