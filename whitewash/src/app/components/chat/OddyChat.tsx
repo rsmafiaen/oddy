@@ -96,7 +96,7 @@ export const OddyChat = ({
 
 		return () => ws.current?.close()
 		// biome-ignore lint: Den funker ikke om vi wrapper med en usecallback
-	}, [isFrog, isPride, addMessage, previousMessages.map, scrollToBottom])
+	}, [isFrog, isPride, addMessage, previousMessages.map, ])
 
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault()
