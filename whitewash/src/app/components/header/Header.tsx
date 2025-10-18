@@ -1,5 +1,5 @@
-"use client";
-import Image from "next/image";
+"use client"
+import Image from "next/image"
 import logo from "@public/header-icons/logo-slogan.svg"
 import dinner from "@public/header-icons/dinner.svg"
 import sale from "@public/header-icons/sale.svg"
@@ -11,7 +11,7 @@ import { type FormEvent, useState } from "react"
 import { ShoppingCartPreview } from "./ShoppingCartPreview"
 
 export function Header() {
-  const [searchInput, setSearchInput] = useState("")
+	const [searchInput, setSearchInput] = useState("")
 
 	const handleSearch = (e: FormEvent) => {
 		e.preventDefault()
