@@ -23,20 +23,19 @@ type OddyChatProps = {
 export const OddyChat = ({
 	isFrog = false,
 	isPride = false,
-	previousMessages
+	previousMessages,
 }: OddyChatProps) => {
 	const [avatar, setAvatar] = useState<StaticImageData>(oddy)
 	const [name, setName] = useState<"Froggy" | "Oddy">(
 		isFrog ? "Froggy" : "Oddy",
 	)
 	previousMessages = previousMessages !== undefined ? [...previousMessages] : []
-	
+
 	const [messages, addMessage] = useStateArray<ChatMsg>(previousMessages)
 	const [input, setInput] = useState("")
 	const ws = useRef<WebSocket | null>(null)
 
 	const messagesEndRef = useRef(null)
-
 
 	const scrollToBottom = () => {
 		messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
@@ -52,6 +51,7 @@ export const OddyChat = ({
 
 	useEffect(() => {
 		scrollToBottom()
+		// biome-ignore lint: Den funker ikke om vi wrapper med en usecallback
 	}, [scrollToBottom])
 
 	// pick correct avatar on mount or when props change
@@ -86,7 +86,8 @@ export const OddyChat = ({
 		}
 
 		return () => ws.current?.close()
-	}, [isFrog, isPride, addMessage])
+		// biome-ignore lint: Den funker ikke om vi wrapper med en usecallback
+	}, [isFrog, isPride, addMessage, scrollToBottom])
 
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault()
@@ -123,10 +124,11 @@ export const OddyChat = ({
 					{messages.map((m) => (
 						<p
 							key={m.id}
-							className={`max-w-[85%] rounded px-3 py-2 ${m.role === "oddy"
+							className={`max-w-[85%] rounded px-3 py-2 ${
+								m.role === "oddy"
 									? "bg-gray-100 text-gray-900 self-start"
 									: "bg-blue-600 text-white self-end ml-auto"
-								}`}
+							}`}
 						>
 							{m.message}
 						</p>
