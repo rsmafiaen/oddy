@@ -41,7 +41,7 @@ export const Oddy = ({
 	return (
 		<div
 			id="chat-container"
-			className="flex flex-col items-end gap-3 z-50 fixed bottom-6 right-6"
+			className="flex flex-col items-end gap-3 z-40 fixed bottom-6 right-6"
 		>
 			<button
 				id="open-chat-button"

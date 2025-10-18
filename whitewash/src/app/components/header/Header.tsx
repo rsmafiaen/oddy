@@ -1,5 +1,5 @@
-"use client"
-import Image from "next/image"
+"use client";
+import Image from "next/image";
 import logo from "@public/header-icons/logo-slogan.svg"
 import dinner from "@public/header-icons/dinner.svg"
 import sale from "@public/header-icons/sale.svg"
@@ -8,9 +8,10 @@ import globe from "@public/header-icons/globe.svg"
 import { HeaderItem } from "./HeaderItem"
 import Link from "next/link"
 import { type FormEvent, useState } from "react"
+import { ShoppingCartPreview } from "./ShoppingCartPreview"
 
 export function Header() {
-	const [searchInput, setSearchInput] = useState("")
+  const [searchInput, setSearchInput] = useState("")
 
 	const handleSearch = (e: FormEvent) => {
 		e.preventDefault()
@@ -20,7 +21,7 @@ export function Header() {
 	}
 
 	return (
-		<div className="h-22.5 bg-rema-blue flex flex-row items-center justify-evenly px-5 text-white gap-5">
+		<div className="h-22.5 bg-rema-blue flex flex-row items-center justify-evenly px-8 text-white gap-5">
 			<Link href="/">
 				<Image src={logo} alt={"REMA 1000"} />
 			</Link>
@@ -52,10 +53,7 @@ export function Header() {
 					Søk
 				</button>
 			</form>
-
-			<Link className="font-bold" href="/handleliste">
-				Handleliste
-			</Link>
+			<ShoppingCartPreview />
 		</div>
 	)
 }

@@ -61,7 +61,7 @@ export const OddyChat = () => {
 	}
 
 	return (
-		<div className="fixed bottom-6 right-6 z-50 w-[min(90vw,420px)]">
+		<div className="fixed bottom-6 right-6 z-40 w-[min(90vw,420px)]">
 			<div className="mb-2 flex items-center gap-3">
 				<select
 					className="border rounded px-2 py-1 text-sm"
