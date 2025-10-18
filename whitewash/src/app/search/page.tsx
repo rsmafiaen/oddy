@@ -1,16 +1,18 @@
 'use client'
 
 import { Header } from "@/components/header/header"
+import { Product } from "@/components/shopping-cart/Product";
 import { useSearchParams } from "next/navigation"
 import { useEffect, useState } from "react";
 
-type product = {
+export type product = {
     productid: number,
     gtin: string,
     name: string,
     description: string,
     price: number,
     pricePerUnit: number,
+    priceperunit: number,
     unit: string,
     allergens: string,
     carbonFootprintGram: number,
@@ -34,7 +36,7 @@ export default function SearchPage(){
                 const result = await response.json();
                 setData(result);
                 setLoading(false);
-                // console.log(result)
+                console.log(result)
             } catch (error) {
                 console.error("Error fetching data:", error);
             }
@@ -49,17 +51,14 @@ export default function SearchPage(){
             <Header />
             <div className="flex flex-col">
                 {data && data.length > 0 ? 
-                    (
-                    <ul>
-                        {data.map((vare: product) => (
-                        
-                        <li key={vare.productid}> 
-                            {/* Vare component */}
-                            {vare.name} 
-                        </li>
-                        ))}
-                    </ul>
-                    ) 
+                    data.map((vare: product) => (
+                    <div className="flex flex-row w-120 justify-between" key={vare.productid}>
+                        <Product product={vare}  />
+
+                        <button type="button">Legg til</button>
+                    </div>
+
+                    ))
                     : 
                     <div>
                         {loading ? "Loading..." : "Fant ingen resultater"}
