@@ -1,10 +1,12 @@
 "use client"
 
+import { OddyChat } from "@/components/chat/OddyChat"
 import { Header } from "@/components/header/header"
 import { Oddy } from "@/components/oddy/Oddy"
-import { useQuery } from "@tanstack/react-query"
 import { Product } from "@/components/shopping-cart/Product"
+import { useQuery } from "@tanstack/react-query"
 import { useSearchParams } from "next/navigation"
+import { useState } from "react"
 
 export type ProductItem = {
 	productId: number
@@ -20,6 +22,7 @@ export type ProductItem = {
 }
 
 export default function SearchPage() {
+	const [chattingWithOddy, setChattingWithOddy] = useState(false)
 	const searchParams = useSearchParams()
 	const search = searchParams.get("a")
 	const url = `http://localhost:4000/api/findProducts?search=`
@@ -33,13 +36,13 @@ export default function SearchPage() {
 		},
 	})
 
+	const oddyMessage = `Jeg har søkt på ${search} på nettsiden din, og fått opp disse resultatene (i json format): ${JSON.stringify(data)}. Gi meg en anbefaling på hva jeg burde kjøpe basert på CO2 fotavtrykket til varene, pris og sunnhet. Til senere svar, vennligst bare referer til disse varene og baser svar på resultatene`
 	const { data: oddyResponse } = useQuery({
 		queryKey: ["Oddy", "oddySearch", JSON.stringify(data)],
 		queryFn: async () => {
 			const url = "http://localhost:4000/api/oddy?inMessage="
 
-			const oddyMessage = `Jeg har søkt på ${search} på nettsiden din, og fått opp disse resultatene (i json format): ${JSON.stringify(data)}. Gi meg en anbefaling på hva jeg burde kjøpe basert på CO2 fotavtrykket til varene, pris og sunnhet`
-			console.log(oddyMessage)
+			// console.log(oddyMessage)
 
 			const res = await fetch(url + oddyMessage)
 
@@ -47,6 +50,33 @@ export default function SearchPage() {
 		},
 		enabled: !!data,
 	})
+
+	const handleToggleChat = () => setChattingWithOddy((v) => !v)
+
+	const oddyView = chattingWithOddy ? (
+		<OddyChat
+			previousMessages={
+				oddyResponse
+					? [
+							{
+								id: "0",
+								role: "user",
+								content: oddyMessage,
+							},
+							{
+								id: crypto.randomUUID(),
+								role: "assistant",
+								content: oddyResponse.message,
+							},
+						]
+					: []
+			}
+		/>
+	) : (
+		oddyResponse && (
+			<Oddy message={oddyResponse.message} onClick={handleToggleChat} />
+		)
+	)
 
 	return (
 		<div>
@@ -67,7 +97,7 @@ export default function SearchPage() {
 						{error ? "En feil oppstod. Vennligst prøv igjen" : ""}
 					</div>
 				)}
-				{oddyResponse && <Oddy message={oddyResponse.message} />}
+				{oddyView}
 			</div>
 		</div>
 	)
