@@ -24,12 +24,14 @@ export const ShoppingCartPreview = () => {
 				<div
 					id="bg"
 					onClick={() => setOpen(false)}
+					onKeyUp={() => setOpen(false)}
 					className="absolute inset-0 top-22.5 z-30 bg-black/20 duration-150 ease-in-out transition-all"
-					role="main"
+					role="cell"
 				>
 					<div
 						id="menu"
 						onClick={(e) => e.stopPropagation()}
+						onKeyUp={(e) => e.stopPropagation()}
 						className="absolute right-0 h-full w-md bg-white shadow-lg p-4 z-50 text-center"
 						role="menu"
 					>
