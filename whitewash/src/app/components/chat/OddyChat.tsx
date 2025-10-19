@@ -7,6 +7,8 @@ import prideFrog from "@/assets/images/pride-froggy.png"
 import styles from "../oddy/Oddy.module.css"
 import { useEffect, useRef, useState } from "react"
 import { useStateArray } from "@/hooks/useStateArray"
+import Markdown from "react-markdown"
+import remarkGfm from "remark-gfm"
 
 type ChatMsg = {
 	id: string
@@ -111,6 +113,18 @@ export const OddyChat = ({
 		setInput("")
 	}
 
+	const tableStyles = `
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    th, td {
+      border: 1px solid black;
+      padding: 8px;
+      text-align: left;
+    }
+  `
+
 	return (
 		<div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-4 bg-rema-secondary-lightblue rounded-3xl p-5 backdrop-blur">
 			<Image
@@ -135,7 +149,7 @@ export const OddyChat = ({
 					{messages
 						.filter((v) => v.id !== "0")
 						.map((m) => (
-							<p
+							<div
 								key={m.id}
 								className={`max-w-[85%] rounded px-3 py-2 ${
 									m.role === "assistant"
@@ -143,8 +157,18 @@ export const OddyChat = ({
 										: "bg-blue-600 text-white self-end ml-auto"
 								}`}
 							>
-								{m.content}
-							</p>
+								<style>{tableStyles}</style>
+								<Markdown
+									remarkPlugins={[remarkGfm]}
+									components={{
+										table: ({ node, ...props }) => (
+											<table style={{ border: "1px solid black" }} {...props} />
+										),
+									}}
+								>
+									{m.content}
+								</Markdown>
+							</div>
 						))}
 					<div ref={messagesEndRef} />
 				</div>
