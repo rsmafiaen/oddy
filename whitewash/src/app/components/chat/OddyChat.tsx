@@ -94,7 +94,7 @@ export const OddyChat = ({
 		}
 
 		return () => ws.current?.close()
-	}, [isFrog, isPride, addMessage, previousMessages.map, ])
+	}, [isFrog, isPride, addMessage, previousMessages.map])
 
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault()

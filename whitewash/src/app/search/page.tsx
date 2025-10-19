@@ -1,7 +1,7 @@
 "use client"
 
 import { OddyChat } from "@/components/chat/OddyChat"
-import { Header } from "@/components/header/header"
+import { Header } from "@/components/header/Header"
 import { Oddy } from "@/components/oddy/Oddy"
 import { Product } from "@/components/shopping-cart/Product"
 import { useQuery } from "@tanstack/react-query"
@@ -24,7 +24,7 @@ export type ProductItem = {
 export default function SearchPage() {
 	const [chattingWithOddy, setChattingWithOddy] = useState(false)
 	const searchParams = useSearchParams()
-	const search = searchParams.get("a")
+	const search = searchParams.get("search")
 	const url = `http://localhost:4000/api/findProducts?search=`
 
 	const { data, isLoading, error } = useQuery({
@@ -41,8 +41,6 @@ export default function SearchPage() {
 		queryKey: ["Oddy", "oddySearch", JSON.stringify(data)],
 		queryFn: async () => {
 			const url = "http://localhost:4000/api/oddy?inMessage="
-
-			// console.log(oddyMessage)
 
 			const res = await fetch(url + oddyMessage)
 

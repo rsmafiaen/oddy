@@ -9,14 +9,18 @@ import { HeaderItem } from "./HeaderItem"
 import Link from "next/link"
 import { type FormEvent, useState } from "react"
 import { ShoppingCartPreview } from "./ShoppingCartPreview"
+import { useSearchParams } from "next/navigation"
 
 export function Header() {
-	const [searchInput, setSearchInput] = useState("")
+	const searchParams = useSearchParams()
+	const [searchInput, setSearchInput] = useState(
+		searchParams.get("search") ?? "",
+	)
 
 	const handleSearch = (e: FormEvent) => {
 		e.preventDefault()
 		if (searchInput.length > 0) {
-			window.location.href = `/search?a=${searchInput}`
+			window.location.href = `/search?search=${searchInput}`
 		}
 	}
 
