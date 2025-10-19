@@ -36,7 +36,7 @@ export default function SearchPage() {
 		},
 	})
 
-	const oddyMessage = `Jeg har søkt på ${search} på nettsiden din, og fått opp disse resultatene (i json format): ${JSON.stringify(data)}. Gi meg en anbefaling på hva jeg burde kjøpe basert på CO2 fotavtrykket til varene, pris og sunnhet. Til senere svar, vennligst bare referer til disse varene og baser svar på resultatene. Du har ikke tilgang til å finne mer informasjon om varer på egen hånd. Om du trenger mer informasjon, be meg om å starte ett nytt søk etter det du leter etter`
+	const oddyMessage = `Jeg har søkt på ${search} på nettsiden din, og fått opp disse resultatene (i json format): ${JSON.stringify(data)}. Gi meg en anbefaling på hva jeg burde kjøpe basert på CO2 fotavtrykket til varene, pris og sunnhet. Til senere svar, vennligst bare referer til disse varene og baser svar på resultatene. Du har ikke tilgang til å finne mer informasjon om varer på egen hånd. Om du trenger mer informasjon, be meg om å starte ett nytt søk etter det du leter etter. Vennlight svar kort, ca 100 bokstaver på det meste.`
 	const { data: oddyResponse, isLoading: oddyLoading } = useQuery({
 		queryKey: ["Oddy", "oddySearch", JSON.stringify(data)],
 		queryFn: async () => {
