@@ -31,6 +31,6 @@ Deno.serve({ port: 4000 }, async (req) => {
 })
 
 // Websocket for chat
-Deno.serve({ port: 4001 }, async (req) => {
+Deno.serve({ port: 42069 }, async (req) => {
 	return await handleWebsocket(req, ollama)
 })
