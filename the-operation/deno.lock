@@ -1,11 +1,9 @@
 {
-  "version": "4",
+  "version": "5",
   "specifiers": {
     "jsr:@std/assert@1": "1.0.15",
     "jsr:@std/dotenv@*": "0.225.3",
     "jsr:@std/internal@^1.0.12": "1.0.12",
-    "npm:@biomejs/biome@*": "2.2.6",
-    "npm:@biomejs/biome@^2.2.6": "2.2.6",
     "npm:@neondatabase/serverless@*": "1.0.2",
     "npm:ollama@*": "0.6.0",
     "npm:postgres@*": "3.4.7"
@@ -25,43 +23,6 @@
     }
   },
   "npm": {
-    "@biomejs/biome@2.2.6": {
-      "integrity": "sha512-yKTCNGhek0rL5OEW1jbLeZX8LHaM8yk7+3JRGv08my+gkpmtb5dDE+54r2ZjZx0ediFEn1pYBOJSmOdDP9xtFw==",
-      "dependencies": [
-        "@biomejs/cli-darwin-arm64",
-        "@biomejs/cli-darwin-x64",
-        "@biomejs/cli-linux-arm64",
-        "@biomejs/cli-linux-arm64-musl",
-        "@biomejs/cli-linux-x64",
-        "@biomejs/cli-linux-x64-musl",
-        "@biomejs/cli-win32-arm64",
-        "@biomejs/cli-win32-x64"
-      ]
-    },
-    "@biomejs/cli-darwin-arm64@2.2.6": {
-      "integrity": "sha512-UZPmn3M45CjTYulgcrFJFZv7YmK3pTxTJDrFYlNElT2FNnkkX4fsxjExTSMeWKQYoZjvekpH5cvrYZZlWu3yfA=="
-    },
-    "@biomejs/cli-darwin-x64@2.2.6": {
-      "integrity": "sha512-HOUIquhHVgh/jvxyClpwlpl/oeMqntlteL89YqjuFDiZ091P0vhHccwz+8muu3nTyHWM5FQslt+4Jdcd67+xWQ=="
-    },
-    "@biomejs/cli-linux-arm64-musl@2.2.6": {
-      "integrity": "sha512-TjCenQq3N6g1C+5UT3jE1bIiJb5MWQvulpUngTIpFsL4StVAUXucWD0SL9MCW89Tm6awWfeXBbZBAhJwjyFbRQ=="
-    },
-    "@biomejs/cli-linux-arm64@2.2.6": {
-      "integrity": "sha512-BpGtuMJGN+o8pQjvYsUKZ+4JEErxdSmcRD/JG3mXoWc6zrcA7OkuyGFN1mDggO0Q1n7qXxo/PcupHk8gzijt5g=="
-    },
-    "@biomejs/cli-linux-x64-musl@2.2.6": {
-      "integrity": "sha512-1ZcBux8zVM3JhWN2ZCPaYf0+ogxXG316uaoXJdgoPZcdK/rmRcRY7PqHdAos2ExzvjIdvhQp72UcveI98hgOog=="
-    },
-    "@biomejs/cli-linux-x64@2.2.6": {
-      "integrity": "sha512-1HaM/dpI/1Z68zp8ZdT6EiBq+/O/z97a2AiHMl+VAdv5/ELckFt9EvRb8hDHpk8hUMoz03gXkC7VPXOVtU7faA=="
-    },
-    "@biomejs/cli-win32-arm64@2.2.6": {
-      "integrity": "sha512-h3A88G8PGM1ryTeZyLlSdfC/gz3e95EJw9BZmA6Po412DRqwqPBa2Y9U+4ZSGUAXCsnSQE00jLV8Pyrh0d+jQw=="
-    },
-    "@biomejs/cli-win32-x64@2.2.6": {
-      "integrity": "sha512-yx0CqeOhPjYQ5ZXgPfu8QYkgBhVJyvWe36as7jRuPrKPO5ylVDfwVtPQ+K/mooNTADW0IhxOZm3aPu16dP8yNQ=="
-    },
     "@neondatabase/serverless@1.0.2": {
       "integrity": "sha512-I5sbpSIAHiB+b6UttofhrN/UJXII+4tZPAq1qugzwCwLIL8EZLV7F/JyHUrEIiGgQpEXzpnjlJ+zwcEhheGvCw==",
       "dependencies": [
@@ -144,8 +105,7 @@
   },
   "workspace": {
     "dependencies": [
-      "jsr:@std/assert@1",
-      "npm:@biomejs/biome@^2.2.6"
+      "jsr:@std/assert@1"
     ]
   }
 }
