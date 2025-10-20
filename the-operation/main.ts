@@ -25,12 +25,12 @@ export const PRIDE_EXTENSION =
 
 const sql = neon(process.env.NEON_CONNECTION_STRING as string)
 
-// Regular REST HTTP endpoints
 Deno.serve({ port: 4000 }, async (req) => {
-	return await handleHttp(req, env, sql, ollama)
-})
+	const url = new URL(req.url)
 
-// Websocket for chat
-Deno.serve({ port: 42069 }, async (req) => {
+	if(url.pathname.includes("/api")) {
+		return await handleHttp(req, env, sql, ollama)
+	}
+
 	return await handleWebsocket(req, ollama)
 })
