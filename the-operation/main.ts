@@ -1,6 +1,7 @@
 import { neon } from "npm:@neondatabase/serverless"
 import { load } from "jsr:@std/dotenv"
 import { Ollama } from "npm:ollama"
+import process from "node:process"
 import { handleHttp } from "./httpServer.ts"
 import { handleWebsocket } from "./websocketServer.ts"
 
@@ -11,7 +12,7 @@ const env = await load({
 const ollama = new Ollama({
 	host: "https://ollama.com",
 	headers: {
-		Authorization: `Bearer ${env.OLLAMA_API_KEY}`,
+		Authorization: `Bearer ${process.env.OLLAMA_API_KEY}`,
 	},
 })
 
@@ -22,7 +23,7 @@ export const FROGGY_INITIAL_PROMPT =
 export const PRIDE_EXTENSION =
 	"You are actually a special froggy, you are pride froggy, you love pride and you are colored like a pride flag"
 
-const sql = neon(env.NEON_CONNECTION_STRING)
+const sql = neon(process.env.NEON_CONNECTION_STRING as string)
 
 // Regular REST HTTP endpoints
 Deno.serve({ port: 4000 }, async (req) => {
